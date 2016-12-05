@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>UQ Library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- SEO -->
+    <meta name="description" content="The University of Queensland, Library General Information, Opening Hours and Computer Availability">
+    <meta name="keywords" content="The University of Queensland, UQ, Library, Opening Hours, Computer Availability, Information, Create New Libraray">
+</head>
+<body>
+    <!-- page loader, the main directive is hidden when Angular is not intialized -->
+    <div ng-app="uqlib" class="loader" ng-controller="loader as ctrl">
+        <!-- the main directive -->
+        <main class="loader-hide" layout="column" flex="grow" layout-align="stretch stretch"></main>
+        <!-- what can be seen when loading -->
+        <div class="loader-content">
+            <img src="/img/logo.svg" height="160" width="160" />
+            <span class="loader-name">The University of Queensland</span>
+            <span class="loader-title">UQ Library Information</span>
+        </div>
+    </div>
+
+    <!--The following files are included in dev mode. Uncomment them if you need dev mode
+    they will be packed by babel.cmd (defined by babel.json) into the /dis/app.js-->
+
+    <!--
+    <script type="text/javascript" src="js/polyfill.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angular-animate.min.js"></script>
+    <script type="text/javascript" src="js/angular-aria.min.js"></script>
+    <script type="text/javascript" src="js/angular-messages.min.js"></script>
+    <script type="text/javascript" src="js/angular-material.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    -->
+
+    <!-- Use app.js for ES6 or dist, use app.min.js for ES5-->
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>

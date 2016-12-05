@@ -1,0 +1,72 @@
+﻿<div layout="column" flex layout-align="strech stretch" ng-init="ctrl.onLoad();">
+    <!-- header bar -->
+    <div theme="forest" layout="row" ng-style="ctrl.$mdMedia('gt-sm')?{'flex':'1 0 120px'}:{'flex':'0 1 50px'}" style="max-height: 120px; min-height:50px;" layout-fill layout-align="center center" class="header-bar">
+        <!-- logo only shown when gt-sm -->
+        <img src="/img/logo.svg" height="120" width="120" flex="initial" hide show-gt-sm title="The University of Queensland" />
+        <div flex="initial" layout="column" layout-align="center center">
+            <!-- UQ title only shown when gt-sm -->
+            <span class="center white md-title" flex="initial" hide show-gt-sm>The University of Queensland</span>
+            <!-- title, font size reduced when width < 400px -->
+            <span class="center white " ng-class="ctrl.$mdMedia('max-width: 400px')?'md-headline':'md-display-1'" flex="initial">UQ Library Information</span>
+        </div>
+    </div>
+    <div flex="auto" layout="column" layout-align="stretch stretch">
+
+        <!-- both menu and button set the ctrl.displayMode to trigger the view change  -->
+        <md-toolbar class="md-hue-2" layout="row" layout-align="start center" style="flex: 0 0 64px;">
+            <!-- menu shown when xs -->
+            <md-menu md-offset="0 -7" hide show-xs flex="grow" layout="row">
+                <md-button aria-label="Open demo menu" class="md-icon-button" layout="row" style="width:100px;" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-menu-origin md-svg-icon="img/menu.svg"></md-icon> Menus
+                </md-button>
+                <md-menu-content class="md-toolbar" width="6">
+                    <md-menu-item>
+                        <md-button class="md-raised" ng-click="ctrl.displayMode='today'" ng-class="ctrl.displayMode == 'today'?'md-warn':'md-primary'">
+                            <span md-menu-align-target>Libraries</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button class="md-raised" ng-click="ctrl.displayMode='week'" ng-class="ctrl.displayMode == 'week'?'md-warn':'md-primary'">
+                            <span md-menu-align-target>Opening Hours</span>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button class="md-raised" ng-click="ctrl.displayMode='new'" ng-class="ctrl.displayMode == 'new'?'md-warn':'md-primary'">
+                            <span md-menu-align-target>New Library</span>
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <!-- button shown when gt-xs -->
+            <md-button class="md-raised" hide show-gt-xs ng-click="ctrl.displayMode='today'" ng-class="ctrl.displayMode == 'today'?'md-warn':'md-primary'" aria-label="Settings" ng-disabled="false">
+                Libraries
+            </md-button>
+            <md-button class="md-raised" hide show-gt-xs ng-click="ctrl.displayMode='week'" ng-class="ctrl.displayMode == 'week'?'md-warn':'md-primary'" aria-label="Settings" ng-disabled="false">
+                Opening Hours
+            </md-button>
+            <md-button class="md-raised" hide show-gt-xs ng-click="ctrl.displayMode='new'" ng-class="ctrl.displayMode == 'new'?'md-warn':'md-primary'" aria-label="Settings" ng-disabled="false">
+                New Library
+            </md-button>
+        </md-toolbar>
+
+        <!-- progress bar visible when loading -->
+        <md-progress-linear md-mode="{{ctrl.isLoading?'query':'determinate'}}" ng-if="ctrl.isLoading"></md-progress-linear>
+
+        <!-- content data bound to ctrl.displayMode, which determines which template to use  -->
+        <content data="ctrl.displayMode" selector="ctrl.templateSelector">
+            <template key="today">
+                <today></today>
+            </template>
+            <template key="week">
+                <week></week>
+            </template>
+            <template key="new">
+                <newlib></newlib>
+            </template>
+            <template key="detail">
+                <detail></detail>
+            </template>
+        </content>
+    </div>
+
+</div>

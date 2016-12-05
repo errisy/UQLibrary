@@ -1,0 +1,10 @@
+C:\HTTP\UQLibrary\UQLibrary\bin\Debug\TypeScript.exe.config
+C:\HTTP\UQLibrary\UQLibrary\obj\Debug\TypeScript.exe
+C:\HTTP\UQLibrary\UQLibrary\obj\Debug\TypeScript.xml
+C:\HTTP\UQLibrary\UQLibrary\obj\Debug\TypeScript.pdb
+C:\HTTP\UQLibrary\UQLibrary\bin\Debug\TypeScript.exe
+C:\HTTP\UQLibrary\UQLibrary\bin\Debug\TypeScript.pdb
+C:\HTTP\UQLibrary\UQLibrary\bin\Debug\TypeScript.xml
+C:\HTTP\UQLibrary\UQLibrary\obj\Debug\UQLibrary.vbprojResolveAssemblyReference.cache
+C:\HTTP\UQLibrary\UQLibrary\obj\Debug\TypeScript.Resources.resources
+C:\HTTP\UQLibrary\UQLibrary\obj\Debug\UQLibrary.vbproj.GenerateResource.Cache

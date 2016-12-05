@@ -1,0 +1,9 @@
+{
+  "jsOut": "app.min.js",
+  "files": [
+    {
+      "name": "app.js",
+      "action": "babel"
+    }
+  ]
+}

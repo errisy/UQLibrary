@@ -1,0 +1,127 @@
+﻿$uqbackground: rgb(73,7,94);
+
+* {
+    font-family: Roboto,Helvetica Neue,sans-serif;
+}
+body{
+    display: flex;
+    flex: 1 1 auto;
+    align-items: stretch;
+    flex-direction: column;
+    [ng-app="uqlib"]{
+        display: flex; 
+        flex: 1 1 auto; 
+        flex-direction: column; 
+        align-items: stretch;
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+.header-bar{
+    background-color: $uqbackground;
+    color: white;
+    text-shadow: 0px 0px 4px #fa28bc;
+    max-height: 120px; 
+    min-height:50px; /*Edge bug: edge requires min-height to layout flexbox properly. However, chrome may go below flex-basis*/
+}
+
+.list-item{
+    border: 1px solid #bbb;
+    border-radius: 28px;
+    max-height: 40px;
+    button{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .lib-title{
+        display: flex; flex: 0 0 56px; flex-direction: row; align-items: stretch; background-color: #56b; border-radius: 28px 28px 0px 0px;
+    }
+}
+.table-item{
+    border: 1px solid #bbb;
+    border-radius: 28px 28px 0px 0px;
+    max-height: 40px;
+    button{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .lib-title{
+        display: flex; flex: 0 0 56px; flex-direction: row; align-items: stretch; background-color: #56b; border-radius: 28px 28px 0px 0px;
+    }
+}
+
+md-list-item, md-list-item .md-list-item-inner {
+    min-height: 20px;
+    height: 25px;
+}
+/*fix up the margin of angular md-button*/
+.no-margin {
+    margin: 0px;
+}
+
+.input-error-message{
+    color: red;
+    font-size: 12px;
+}
+.status-message{
+    font-size: 12px;
+    min-height: 16px;   
+    height: 16px;
+    max-height: 16px;
+}
+.detail-subtitle{
+    flex: 0 0 48px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #222;
+    color: #ddd;
+}
+.detail-row{
+    flex: 0 0 56px;
+}
+.detail-room-availability{
+    border: 1px solid #999;
+    border-radius: 14px;
+}
+.detail-even{
+    background-color: rgba(24,24,24,0.1);
+}
+.detail-odd{
+    background-color: rgba(24,24,24,0.2);
+}
+.detail-header{
+    height: 36px;
+    font-size: 24px;
+}
+.detail-info{
+    height: 36px;
+    font-size: 20px;
+}
+/*force the height of fixed height item to work with flex="initial" for both IE and Apple(Safari/Chrome). otherwise, the flex boxes may be compressed to 0 height in IE or Apple browsers.*/
+.list-row{
+    min-height: 56px;
+    max-height: 56px;
+    height: 56px;
+}
+.input-text{
+    min-height: 58px;   
+    height: 58px;
+    max-height: 58px;
+}
+.input-select{
+    min-height: 70px;   
+    height: 70px;
+    max-height: 70px;
+}
+/*force the round svg buttons no margin no padding to fit 56px by 56px*/
+.info-button{
+    margin: 0px; padding:0px; flex:0 0 56px;
+}
+

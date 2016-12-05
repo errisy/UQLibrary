@@ -1,0 +1,1 @@
+node "C:\HTTP\UQLibrary\packages\Microsoft.TypeScript.Compiler.2.1.1-rc\tools\tsc.js" -w -p UQLibrary

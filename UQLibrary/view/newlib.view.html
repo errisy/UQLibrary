@@ -1,0 +1,124 @@
+﻿<!-- title -->
+<div class="md-display-1" flex="initial" layout="column" layout-align="center center">Create New Library</div>
+<form name="libraryForm" flex="initial" layout="column" layout-align="center center" style="min-height: 0px;">
+    <div layout="column" flex="initial" ng-style="ctrl.$mdMedia('gt-sm')?{'min-width':'800px'}:{}">
+        <div layout="column" layout-gt-xs="row" flex="initial">
+            <!-- library id -->
+            <md-input-container class="md-block input-text" flex-gt-sm>
+                <label>Library ID</label>
+                <input name="id" type="number" ng-pattern="/^\d*$/" required ng-model="ctrl.Library.lid" />
+                <div>
+                    <div ng-if="libraryForm.id.$error['required']" class="input-error-message">
+                        A valid library ID must be provided.
+                    </div>
+                    <div ng-if="libraryForm.id.$error['pattern']" class="input-error-message">
+                        A valid library ID should contains only numbers.
+                    </div>
+                </div>
+            </md-input-container>
+            <!-- library abbreviation -->
+            <md-input-container class="md-block input-text" flex-gt-sm>
+                <label>Abbreviation</label>
+                <input name="abbr" required ng-minlength="5" ng-maxlength="5" ng-model="ctrl.Library.abbr">
+                <div>
+                    <div ng-if="libraryForm.abbr.$error['required']" class="input-error-message">
+                        A library abbreviation of 5 characters must be provided.
+                    </div>
+                    <div ng-if="libraryForm.abbr.$error['minlength']||libraryForm.abbr.$error['maxlength']" class="input-error-message">
+                        A library abbreviation must be exactly 5 characters.
+                    </div>
+                </div>
+            </md-input-container>
+        </div>
+        <div layout="row" flex="initial">
+            <!-- library name -->
+            <md-input-container class="md-block input-text" flex-gt-sm>
+                <label>Library Name</label>
+                <input required name="name" ng-maxlength="50" ng-model="ctrl.Library.name">
+                <div>
+                    <div ng-show="libraryForm.name.$error['required']" class="input-error-message">
+                        A library name must be provided.
+                    </div>
+                    <div ng-show="libraryForm.name.$error['maxlength']" class="input-error-message">
+                        A valid library name must be no longer than 50 characters.
+                    </div>
+                </div>
+            </md-input-container>
+        </div>
+        <div layout="row"  flex="initial">
+            <!-- select of campus -->
+            <md-input-container class="md-block input-select" flex-gt-sm>
+                <label>Campus </label>
+                <md-select name="campus" ng-model="ctrl.Library.campus" required>
+                    <md-option value="St Lucia">St Lucia</md-option>
+                    <md-option value="Herston">Herston</md-option>
+                    <md-option value="Bundaberg">Bundaberg</md-option>
+                    <md-option value="PACE">PACE</md-option>
+                    <md-option value="Mater">Mater</md-option>
+                </md-select>
+                <div>
+                    <div ng-if="libraryForm.campus.$error['required']" class="input-error-message">
+                        A campus must be selected.
+                    </div>
+                </div>
+            </md-input-container>
+        </div>
+        <div flex="initial">
+            <!-- library description -->
+            <md-input-container class="md-block input-text" flex-gt-sm>
+                <label>Description </label>
+                <input name="desc" ng-model="ctrl.Library.desc">
+            </md-input-container>
+        </div>
+        <div  flex="initial">
+            <!-- library website URL -->
+            <md-input-container class="md-block input-text" flex-gt-sm>
+                <label>URL</label>
+                <input name="url" ng-model="ctrl.Library.url" ng-pattern="/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/" />
+                <div>
+                    <div ng-show="libraryForm.url.$viewValue&&libraryForm.url.$error['pattern']" class="input-error-message">
+                        URL must starts with http:// or https:// and contains valid domain name.
+                    </div>
+                </div>
+            </md-input-container>
+        </div>
+        <div layout-gt-xs="row"  flex="initial">
+            <!-- longitude -->
+            <md-input-container class="md-block input-text" flex="intial">
+                <label>Longitude</label>
+                <input ng-model="ctrl.Library.long" name="long" type="number" min="-90" max="90" />
+                <div>
+                    <div ng-show="libraryForm.long.$error['min']||libraryForm.long.$error['max']" class="input-error-message">
+                        The value of Latitude should be between -90 and 90.
+                    </div>
+                    <div ng-show="libraryForm.long.$error['number']" class="input-error-message">
+                        Invalid number format.
+                    </div>
+                </div>
+            </md-input-container>
+            <!-- latitude -->
+            <md-input-container class="md-block input-text" flex="intial">
+                <label>Latitude</label>
+                <input ng-model="ctrl.Library.lat" name="lat" type="number" min="-180" max="180" />
+                <div>
+                    <div ng-show="libraryForm.lat.$error['min']||libraryForm.lat.$error['max']" class="input-error-message">
+                        The value of Longitude should be between -180 and 180.
+                    </div>
+                    <div ng-show="libraryForm.lat.$error['pattern']" class="input-error-message">
+                        Invalid number format.
+                    </div>
+                </div>
+            </md-input-container>
+        </div>
+        <!-- status for save/cancel progress -->
+        <div style="display:flex; flex-direction:row; justify-content:center;" flex="initial">
+            <div class="status-message">{{ctrl.status}}</div>
+        </div>
+        <div style="display:flex; flex-direction:row; justify-content:center;" flex="initial">
+            <!-- cancel button, navigate to library list -->
+            <md-button class="md-warn md-raised create-cancel" ng-click="ctrl.Cancel();">Cancel</md-button>
+            <!-- save button, disabled if form contains errors -->
+            <md-button ng-disabled="ctrl.SaveDisabled || (libraryForm.$error|hasKeys)" class="md-primary md-raised create-save" ng-click="ctrl.Save();">Save</md-button>
+        </div>
+    </div>
+</form>

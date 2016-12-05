@@ -1,0 +1,10 @@
+C:\HTTP\stores\stores\bin\Debug\TypeScript.exe.config
+C:\HTTP\stores\stores\obj\Debug\stores.vbprojResolveAssemblyReference.cache
+C:\HTTP\stores\stores\obj\Debug\TypeScript.Resources.resources
+C:\HTTP\stores\stores\obj\Debug\stores.vbproj.GenerateResource.Cache
+C:\HTTP\stores\stores\obj\Debug\TypeScript.xml
+C:\HTTP\stores\stores\bin\Debug\TypeScript.exe
+C:\HTTP\stores\stores\bin\Debug\TypeScript.pdb
+C:\HTTP\stores\stores\bin\Debug\TypeScript.xml
+C:\HTTP\stores\stores\obj\Debug\TypeScript.exe
+C:\HTTP\stores\stores\obj\Debug\TypeScript.pdb

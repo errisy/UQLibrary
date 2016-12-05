@@ -1,0 +1,140 @@
+﻿<div layout="column" ng-init="ctrl.onLoad();">
+    <md-list flex>
+        <!-- name of library -->
+        <div class="md-display-1" layout="column" layout-align="center center">{{ctrl.library.name}}</div>
+        <div layout="row" layout-wrap layout-margin="2" layout-align="center center">
+            <div class="md-3-line table-item" layout="column" layout-align="stretch stretch"
+                 flex="100" flex-gt-md="80">
+                <div layout-gt-sm="row" layout="column" flex="initial" style="background-color: #45b; border-radius: 28px 28px 0px 0px;">
+                    <!-- library name -->
+                    <div flex="33" class="list-row" layout="row">
+                        <md-button class="md-fab md-primary info-button" ng-click="ctrl.setMode(item.lid);" aria-label="{{ctrl.library.name}}">
+                            <md-tooltip md-direction="top" class="md-title">
+                                Library Name
+                            </md-tooltip>
+                            <md-icon md-svg-src="/img/info.svg"></md-icon>
+                        </md-button>
+                        <div class="md-title lib-title" style="flex: 1 1 auto; color: white; padding: 0px 3px; display: flex; align-items: center; flex-direction: row; border-radius: 4px;">{{ctrl.library.name }}</div>
+                    </div>
+                    <!-- computer availability chart -->
+                    <div flex="33" class="list-row" layout="row" style="background-color: white;">
+                        <md-button ng-style="ctrl.library.isComputersAvailable?{'background-color':'green'}:{}" 
+                                   class="md-fab md-primary info-button" aria-label="Compute Availability" ng-disabled="!ctrl.library.isComputersAvailable">
+                            <md-tooltip md-direction="top" class="md-title">
+                                Computer Availability
+                            </md-tooltip>
+                            <md-icon md-svg-src="/img/computer.svg"></md-icon>
+                        </md-button>
+                        <div class="md-raised" style="flex: 1 1 auto; display: flex; align-items: center; flex-direction: column; align-items: flex-start; justify-content: space-around;"
+                             ng-if="ctrl.library.isComputersAvailable" hisback value="ctrl.library.availablePercentage" foreground="'#bfb'" background="'#ddd'">
+                            <span class="all-computers">Computers: {{ ctrl.library.totalAvailable }} out of {{ ctrl.library.numberOfComputers }} available</span>
+                            <span>{{ctrl.library.numberOfComputerRooms}} Computer {{(ctrl.library.numberOfComputerRooms>1)?'Rooms':'Room'}}</span>
+                        </div>
+                        <div class="md-raised" style="flex: 1 1 auto; display: flex; align-items: center; flex-direction: row;" ng-if="!ctrl.library.isComputersAvailable" hisback value="ctrl.library.availablePercentage" foreground="'#bfb'" background="'#ddd'">Computers: N/A</div>
+                    </div>
+                    <!-- open/close status -->
+                    <div flex="33" class="list-row" layout="row" style="color: white;">
+                        <md-button ng-style="(ctrl.library.numberOfOpenDepartments>0)?{'background-color':'#ff6a00'}:{'background-color':'#bbb'}" 
+                                   class="md-fab md-primary info-button" aria-label="Compute Availability">
+                            <md-tooltip md-direction="top" class="md-title">
+                                {{(ctrl.library.numberOfOpenDepartments>0)?'Currently Open':'Currently Closed'}}
+                            </md-tooltip>
+                            <md-icon md-svg-src="/img/study.svg"></md-icon>
+                        </md-button>
+                        <div style="flex: 1 1 auto; display: flex; align-items: flex-start; flex-direction: column; justify-content: space-around; border-radius: 4px;">
+                            <div style="font-size: 18px;" ng-if="ctrl.library.numberOfOpenDepartments>0">{{ctrl.library.numberOfOpenDepartments}} out of {{ctrl.library.departments.length}} {{ctrl.library.departments.length>1?' Departments':' Department'}} Open</div>
+                            <div style="font-size: 18px;" ng-if="ctrl.library.numberOfOpenDepartments==0">Currently Closed</div>
+                            <div style="font-size: 18px;">{{ctrl.library.renderedHours}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- general information for the library, row layout when gt-sm, column layout when sm xs -->
+                <div class="md-title detail-subtitle" layout="column" layout-align="center center">
+                    <div>Library Information</div>
+                </div>
+                <div layout="column" layout-gt-sm="row">
+                    <div class="detail-even" layout="column" flex="auto" layout-align="center center">
+                        <div class="md-title detail-header">ID</div>
+                        <div class="detail-info lib-id">{{ctrl.library.lid}}</div>
+                    </div>
+                    <div class="detail-odd" layout="column" flex="auto" layout-align="center center">
+                        <div class="md-title detail-header">Category</div>
+                        <div class="detail-info">{{ctrl.library.category}}</div>
+                    </div>
+                    <div class="detail-even" layout="column" flex="auto" layout-align="center center">
+                        <div class="md-title detail-header">Abbreviation</div>
+                        <div class="detail-info">{{ctrl.library.abbr}}</div>
+                    </div>
+                    <div class="detail-odd" layout="column" flex="auto" layout-align="center center">
+                        <div class="md-title detail-header">UQ Website</div>
+                        <div class="detail-info"> <a ng-href="{{ctrl.library.url}}" target="{{'_lib'+ctrl.library.lid}}">Link</a> </div>
+                    </div>
+                </div>
+
+                <!-- description of library -->
+                <div layout="column">
+                    <div layout="column" flex="auto" layout-align="center center">
+                        <div class="md-title detail-header">Description</div>
+                        <div flex="initial">{{ctrl.library.desc}}</div>
+                    </div>
+                </div>
+
+                <div class="md-title detail-subtitle" layout="column" layout-align="center center" ng-if="ctrl.library.rooms">
+                    <div>Rooms Computer Avaliability</div>
+                </div>
+                <!-- computer availability for each room, row layout when gt-sm, column layout when sm xs -->
+                <div layout="column" layout-gt-sm="row">
+                    <div ng-repeat="room in ctrl.library.rooms" class="detail-room-availability" layout="column" flex="auto" layout-align="center center" hisback value="room.Percentage" foreground="'#bfb'" background="'#ddd'">
+                        <div class="md-title">{{room.Name}}</div>
+                        <div  class="room-computers">{{room.Available}} out of {{room.Available + room.Occupied}} Available</div>
+                    </div>
+                </div>
+                <div class="md-title detail-subtitle" layout="column" layout-align="center center">
+                    <div>Department Opening Hours</div>
+                </div>
+                <!-- list of date and weekday, shown when gt-sm, row layout -->
+                <div style="flex: 0 0 56px; flex-direction: row; align-items: stretch; background-color: #555; color: white;" layout="row" hide show-gt-sm>
+                    <div style="flex: 1 1 23%" layout="column" layout-align="center center">Department</div>
+                    <div ng-repeat="day in ctrl.library.departmentsWeek[0].weekHoursInfo" layout="column" layout-align="center center" style="flex: 1 1 11%" ng-style="{'background-color': ($index % 2==1)?'rgba(255,255,255,0)':'rgba(20,20,20,0.5)'}">
+                        <div>
+                            {{day.date}}
+                        </div>
+                        <div>
+                            {{day.weekday}}
+                        </div>
+                    </div>
+                </div>
+                <!-- opening hours for corresponding date and weekday, shown when gt-sm, row layout -->
+                <div ng-repeat="department in ctrl.library.departmentsWeek" ng-style="{'background-color': ($index % 2==0)?'white':'lightgrey'}"
+                     style="display: flex; flex: 0 0 56px; flex-direction: row; align-items: stretch;" ng-hide="!ctrl.$mdMedia('gt-sm')">
+                    <div style="flex: 1 1 23%;" layout="column" layout-align="center center">{{department.name}}</div>
+                    <div class="rendered-hours" ng-repeat="day in department.weekHoursInfo" layout="column" layout-align="center center" style="flex: 1 1 11%" ng-style="{'background-color': ($index % 2==1)?'rgba(255,255,255,0)':'rgba(80,80,80,0.2)'}">
+                        {{day.rendered}}
+                    </div>
+                </div>
+
+                <!-- opening hours for date and weekday, shown when xs sm, column layout -->
+                <div ng-repeat="department in ctrl.library.departmentsWeek" ng-style="{'background-color': ($index % 2==0)?'white':'lightgrey'}" layout="row"
+                     ng-hide="ctrl.$mdMedia('gt-sm')">
+                    <div flex="40" layout="column" layout-align="center center">{{department.name}}</div>
+                    <div flex="60" layout="column">
+                        <div flex="60" layout="row" layout-align="center center" class="list-row" ng-repeat="day in department.weekHoursInfo" ng-style="{'background-color': ($index % 2==0)?'rgba(255,255,255,0)':'rgba(80,80,80,0.2)'}">
+                            <div flex="50" layout="column" layout-align="center center">
+                                <div>
+                                    {{day.date}}
+                                </div>
+                                <div>
+                                    {{day.weekday}}
+                                </div>
+                            </div>
+                            <div class="rendered-hours" flex="50" layout="column" layout-align="center center" style="flex: 1 1 11%">
+                                {{day.rendered}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </md-list>
+</div>

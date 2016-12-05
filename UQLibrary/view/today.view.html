@@ -1,0 +1,54 @@
+﻿<div layout="column">
+    <md-list flex>
+        <div class="md-display-1" layout="column" layout-align="center center">Libraries Information Today ({{ctrl.Weekday|date:"EEEE"}})</div>
+        <md-input-container style="padding: 0; margin:12px 0 0 0;" class="md-block" ng-hide="ctrl.isLoading">
+            <label>Type Keyword to Filter Libraries</label>
+            <input class="keyword-filter" ng-model="keyword">
+        </md-input-container>
+        <div layout="row" style="margin: -15px 0 0 0;" layout-wrap layout-margin="2" layout-align="space-around">
+            <div class="md-3-line list-item md-raised" ng-repeat="item in $parent.ctrl.libraries|fieldsFilter:['name']:keyword" layout="column" layout-align="stretch stretch"
+                flex-xs="90" flex-sm="90" flex-md="40" flex-lg="30" flex-xl="20">
+                <!-- library name -->
+                <div class="lib-title">
+                    <md-button class="md-fab md-primary info-button" ng-click="ctrl.setMode(item.lid);" aria-label="{{item.name}}">
+                        <md-tooltip md-direction="top" class="md-title">
+                            View Detailed Information
+                        </md-tooltip>
+                        <md-icon md-svg-src="/img/info.svg"></md-icon>
+                    </md-button>
+                    <div class="md-title" style="flex: 1 1 auto; color: white; padding: 0px 3px; display: flex; align-items: center; flex-direction: row; border-radius: 4px;">{{ item.name }}</div>
+                </div>
+                <!-- computer availability chart -->
+                <div style="display: flex; padding:0px; flex: 0 0 56px; flex-direction: row; align-items: stretch;">
+                    <md-button ng-style="item.isComputersAvailable?{'background-color':'green'}:{}" 
+                               class="md-fab md-primary info-button" aria-label="Compute Availability info-button" ng-disabled="!item.isComputersAvailable">
+                        <md-tooltip md-direction="top" class="md-title">
+                            Computer Availability
+                        </md-tooltip>
+                        <md-icon md-svg-src="/img/computer.svg"></md-icon>
+                    </md-button>
+                    <div class="md-raised" style="flex: 1 1 auto; display: flex; align-items: center; flex-direction: column; align-items: flex-start; justify-content: space-around;" ng-if="item.isComputersAvailable" hisback value="item.availablePercentage" foreground="'#bfb'" background="'#ddd'">
+                        <span>Computers: {{ item.totalAvailable }} out of {{ item.numberOfComputers }} available</span>
+                        <span>{{item.numberOfComputerRooms}} Computer {{(item.numberOfComputerRooms>1)?'Rooms':'Room'}}</span>
+                    </div>
+                    <div class="md-raised" style="flex: 1 1 auto; display: flex; align-items: center; flex-direction: row;" ng-if="!item.isComputersAvailable" hisback value="item.availablePercentage" foreground="'#bfb'" background="'#ddd'">Computers: N/A</div>
+                </div>
+                <!-- open/close status -->
+                <div style="display: flex; padding:0px; flex: 0 0 56px; flex-direction: row; align-items: stretch;">
+                    <md-button ng-style="(item.numberOfOpenDepartments>0)?{'background-color':'#ff6a00'}:{'background-color':'#bbb'}" 
+                               class="md-fab md-primary info-button" aria-label="Compute Availability">
+                        <md-tooltip md-direction="top" class="md-title">
+                            {{(item.numberOfOpenDepartments>0)?'Currently Open':'Currently Closed'}}
+                        </md-tooltip>
+                        <md-icon md-svg-src="/img/study.svg"></md-icon>
+                    </md-button>
+                    <div style="flex: 1 1 auto; display: flex; align-items: flex-start; flex-direction: column; justify-content: space-around; border-radius: 4px;">
+                        <div style="font-size: 18px;" ng-if="item.numberOfOpenDepartments>0">{{item.numberOfOpenDepartments}} out of {{item.departments.length}} {{item.departments.length>1?' Departments':' Department'}} Open</div>
+                        <div style="font-size: 18px;" ng-if="item.numberOfOpenDepartments==0">Currently Closed</div>
+                        <div style="font-size: 18px;">{{item.renderedHours}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </md-list>
+</div>
